@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: discord-webhook-monitor
+    env: node
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    rootDirectory: .
+    envVars:
+      - key: TARGET_HOST
+        sync: false
+      - key: DISCORD_WEBHOOK_URL
+        sync: false
+      - key: CHECK_INTERVAL
+        value: "15000"
+      - key: STATUS_INTERVAL
+        value: "300000"
+    disk:
+      name: logs
+      mountPath: /opt/render/project/logs
+      sizeGB: 1
